@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class Person {
         this.lastEdited = lastEdited;
     }
 
-    public Person() {
+    public Person(String firstName, String lastName, String phone, String created, Date lastEdited) {
     }
 
     public String getFirstName() {

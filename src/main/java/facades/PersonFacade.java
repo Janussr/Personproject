@@ -2,7 +2,9 @@ package facades;
 
 import dtos.PersonDTO;
 import entities.Person;
+import utils.EMF_Creator;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -41,12 +43,23 @@ public class PersonFacade {
         return PersonDTO.getDtos(personList);
     }
 
+   public PersonDTO addPerson(PersonDTO personDTO){
+       EntityManager em = emf.createEntityManager();
+       Person person = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getPhone(), personDTO.getCreated(), personDTO.getLastEdited());
+        return null;
+   }
 
-    //addPerson
+
     //deletePerson
-    //getAllPersons
     //getPersonById
     //editPerson
 
 
+
+    //Code below is used to sout information from DB
+    public static void main(String[] args) {
+        emf = EMF_Creator.createEntityManagerFactory();
+        PersonFacade pf = getPersonFacade(emf);
+        pf.getAllPerson().forEach(dto-> System.out.println(dto));
+    }
 }

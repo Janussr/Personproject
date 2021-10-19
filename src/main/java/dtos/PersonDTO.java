@@ -88,4 +88,16 @@ public class PersonDTO {
     public void setLastEdited(Date lastEdited) {
         this.lastEdited = lastEdited;
     }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", created='" + created + '\'' +
+                ", lastEdited=" + lastEdited +
+                '}';
+    }
 }
