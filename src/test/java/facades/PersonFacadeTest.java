@@ -1,5 +1,7 @@
 package facades;
 
+import dtos.PersonDTO;
+import entities.Person;
 import entities.RenameMe;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
@@ -13,12 +15,12 @@ class PersonFacadeTest {
 
 
     private static EntityManagerFactory emf;
-    private static FacadeExample facade;
+    private static PersonFacade facade;
 
     @BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        facade = FacadeExample.getFacadeExample(emf);
+        facade = PersonFacade.getPersonFacade(emf);
     }
 
     @AfterAll
@@ -50,5 +52,15 @@ class PersonFacadeTest {
         int expected = 1;
        // int actual = PersonFacade.getPersonFacade().getsize;
         //assertEquals(expected,actual);
+    }
+    
+    @Test
+    public void addPersonTest(){
+        Person person = new Person("wd","wda","12314","232",2021-10-20);
+        PersonDTO createdPerson = new PersonDTO(person);
+
+        int actual = 2;
+        PersonDTO expected = facade.addPerson(createdPerson);
+        assertEquals(expected,actual);
     }
 }

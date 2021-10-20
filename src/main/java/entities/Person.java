@@ -30,6 +30,9 @@ public class Person {
     public Person(String firstName, String lastName, String phone, String created, Date lastEdited) {
     }
 
+    public Person(String firstName, String lastName, String phone, String created, int i) {
+    }
+
     public String getFirstName() {
         return firstName;
     }

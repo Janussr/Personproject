@@ -46,14 +46,45 @@ public class PersonFacade {
    public PersonDTO addPerson(PersonDTO personDTO){
        EntityManager em = emf.createEntityManager();
        Person person = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getPhone(), personDTO.getCreated(), personDTO.getLastEdited());
-        return null;
+       try {
+           em.getTransaction().begin();
+           em.persist(person);
+           em.getTransaction().commit();
+
+            return new PersonDTO(person);
+       } finally {
+           em.close();
+       }
    }
 
 
     //deletePerson
-    //getPersonById
-    //editPerson
+    public PersonDTO deletePerson(int id){
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, id);
+            em.remove(person);
+            em.getTransaction().commit();
+        return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
 
+    public PersonDTO getPersonById(int id) {
+        EntityManager em = getEntityManager();
+        try {
+            Person person = em.find(Person.class, id);
+            return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
+
+    public PersonDTO editPerson (){
+        return null;
+    }
 
 
     //Code below is used to sout information from DB
