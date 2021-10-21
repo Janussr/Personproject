@@ -13,21 +13,17 @@ public class Person {
     private String firstName;
     private String lastName;
     private String phone;
-    private String created;
-    private Date lastEdited;
 
 
 
-    public Person(Integer id, String firstName, String lastName, String phone, String created, Date lastEdited) {
-        this.id = id;
+
+    public Person(String firstName, String lastName, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.created = created;
-        this.lastEdited = lastEdited;
     }
 
-    public Person(String firstName, String lastName, String phone, String created, Date lastEdited) {
+    public Person() {
     }
 
     public Person(String firstName, String lastName, String phone, String created, int i) {
@@ -57,21 +53,6 @@ public class Person {
         this.phone = phone;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public Date getLastEdited() {
-        return lastEdited;
-    }
-
-    public void setLastEdited(Date lastEdited) {
-        this.lastEdited = lastEdited;
-    }
 
     public Integer getId() {
         return id;

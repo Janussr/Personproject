@@ -12,16 +12,12 @@ public class PersonDTO {
     private String firstName;
     private String lastName;
     private String phone;
-    private String created;
-    private Date lastEdited;
 
     public PersonDTO(Person person){
         this.id = person.getId();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.phone = person.getPhone();
-        this.created = person.getCreated();
-        this.lastEdited = person.getLastEdited();
     }
 
     public static List<PersonDTO> getDtos(List<Person> personList){
@@ -33,12 +29,10 @@ public class PersonDTO {
     public PersonDTO() {
     }
 
-    public PersonDTO(String firstName, String lastName, String phone, String created, Date lastEdited) {
+    public PersonDTO(String firstName, String lastName, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.created = created;
-        this.lastEdited = lastEdited;
     }
 
     public Integer getId() {
@@ -73,22 +67,6 @@ public class PersonDTO {
         this.phone = phone;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public Date getLastEdited() {
-        return lastEdited;
-    }
-
-    public void setLastEdited(Date lastEdited) {
-        this.lastEdited = lastEdited;
-    }
-
     @Override
     public String toString() {
         return "PersonDTO{" +
@@ -96,8 +74,6 @@ public class PersonDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone='" + phone + '\'' +
-                ", created='" + created + '\'' +
-                ", lastEdited=" + lastEdited +
                 '}';
     }
 }

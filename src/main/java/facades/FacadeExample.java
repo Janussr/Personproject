@@ -6,25 +6,20 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-
-//import errorhandling.RenameMeNotFoundException;
 import utils.EMF_Creator;
 
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
+
 public class FacadeExample {
 
     private static FacadeExample instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
     private FacadeExample() {}
-    
-    
+
+
     /**
-     * 
+     *
      * @param _emf
      * @return an instance of this facade class.
      */
@@ -39,10 +34,10 @@ public class FacadeExample {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     public RenameMeDTO create(RenameMeDTO rm){
         RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(rme);
@@ -52,32 +47,28 @@ public class FacadeExample {
         }
         return new RenameMeDTO(rme);
     }
-    public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
+    public RenameMeDTO getById(long id){
         EntityManager em = emf.createEntityManager();
-        RenameMe rm = em.find(RenameMe.class, id);
-//        if (rm == null)
-//            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new RenameMeDTO(rm);
+        return new RenameMeDTO(em.find(RenameMe.class, id));
     }
-    
-    //TODO Remove/Change this before use
+
     public long getRenameMeCount(){
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try{
             long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
             return renameMeCount;
-        }finally{  
+        }finally{
             em.close();
         }
     }
-    
+
     public List<RenameMeDTO> getAll(){
         EntityManager em = emf.createEntityManager();
         TypedQuery<RenameMe> query = em.createQuery("SELECT r FROM RenameMe r", RenameMe.class);
         List<RenameMe> rms = query.getResultList();
         return RenameMeDTO.getDtos(rms);
     }
-    
+
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
